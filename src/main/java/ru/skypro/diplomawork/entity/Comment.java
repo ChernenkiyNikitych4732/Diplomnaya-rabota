@@ -1,7 +1,6 @@
 package ru.skypro.diplomawork.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
