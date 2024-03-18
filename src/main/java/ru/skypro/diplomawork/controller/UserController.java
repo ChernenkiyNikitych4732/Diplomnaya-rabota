@@ -1,0 +1,61 @@
+package ru.skypro.diplomawork.controller;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import ru.skypro.diplomawork.dto.NewPasswordDto;
+import ru.skypro.diplomawork.dto.UserDto;
+import ru.skypro.diplomawork.security.MyUserPrincipal;
+import ru.skypro.diplomawork.service.AuthService;
+import ru.skypro.diplomawork.service.UserService;
+
+@Slf4j
+@CrossOrigin(value = "http://localhost:3000")
+@RestController
+@RequiredArgsConstructor
+
+@RequestMapping(path = "/users")
+public class UserController {
+
+    private final UserService userService;
+    private final AuthService authService;
+    private final MyUserPrincipal userPrincipal;
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/set_password")
+    public ResponseEntity<Void> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
+        log.info("Was invoked set password for user method");
+        authService.changePassword(newPasswordDto, userPrincipal);
+        return ResponseEntity.ok().build();
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/me")
+    public ResponseEntity<UserDto> getUser() {
+        log.info("Was invoked get user method");
+        return ResponseEntity.ok(userService.getUserDtoByUsername(userPrincipal.getUsername()));
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PatchMapping("/me")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto dto) {
+        log.info("Was invoked update user method");
+        return ResponseEntity.ok(userService.updateUser(dto, userPrincipal.getUsername()));
+    }
+
+    @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> updateUserImage(@RequestBody MultipartFile image) {
+        log.info("Was invoked update user image method");
+        userService.updateUserAvatar(userPrincipal.getUsername(), image);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value = "/avatar/{id}", produces = {MediaType.IMAGE_PNG_VALUE})
+    public ResponseEntity<byte[]> getUserAvatar(@PathVariable long id) {
+        return ResponseEntity.ok(userService.getUserAvatar(id));
+    }
+}
