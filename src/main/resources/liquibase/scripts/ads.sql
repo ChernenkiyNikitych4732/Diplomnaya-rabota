@@ -1,12 +1,12 @@
 -- liquibase formatted sql
 
--- changeset Ian:1
+-- changeset Nikita:1
 CREATE TABLE ads
 (
-    ad_id          SERIAL PRIMARY KEY,
-    author_id      INT          NOT NULL,
-    ad_price       INT          NOT NULL CHECK ( ad_price > 0),
-    ad_title       VARCHAR      NOT NULL,
-    ad_description VARCHAR      NOT NULL,
+    ad_id          SERIAL,
+    author_id      INT,
+    ad_price       INT,
+    ad_title       VARCHAR,
+    ad_description VARCHAR,
     image_path     VARCHAR
 );
