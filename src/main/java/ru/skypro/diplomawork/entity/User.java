@@ -10,9 +10,11 @@ import java.util.List;
 @Data
 @Table(name = "users")
 public class User {
+    @Column(name = "ad_users")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "Long_id")
     private String firstName;
     private String lastName;
     private String username;

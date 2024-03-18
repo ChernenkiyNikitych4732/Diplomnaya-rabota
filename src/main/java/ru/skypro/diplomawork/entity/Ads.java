@@ -9,9 +9,11 @@ import java.util.List;
 @Data
 @Table(name = "ads")
 public class Ads {
+    @Column(name = "ad_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "ad_price")
     private BigDecimal price;
     private String title;
     private String description;
