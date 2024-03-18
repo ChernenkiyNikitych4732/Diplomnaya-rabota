@@ -2,8 +2,6 @@ package ru.skypro.diplomawork.entity;
 
 import lombok.Data;
 import ru.skypro.diplomawork.dto.Role;
-
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
