@@ -9,8 +9,8 @@ import java.util.List;
 @Data
 @Table(name = "ads")
 public class Ads {
-    @Column(name = "ad_id")
     @Id
+    @Column(name = "ad_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "ad_price")
@@ -24,4 +24,10 @@ public class Ads {
     List<Comments> comments;
     @OneToMany(mappedBy = "ads", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Image> images;
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public Long getId() {
+        return id;
+    }
 }

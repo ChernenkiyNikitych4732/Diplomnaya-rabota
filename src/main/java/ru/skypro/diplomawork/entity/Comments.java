@@ -13,7 +13,6 @@ public class Comments {
     private Long id;
     @Column(name = "comment_text")
     String text;
-    @Column(name = "ads_text")
     LocalDateTime createdAt;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -23,4 +22,10 @@ public class Comments {
     Ads ad;
     @ManyToOne
     Ads ads;
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public Long getId() {
+        return id;
+    }
 }
