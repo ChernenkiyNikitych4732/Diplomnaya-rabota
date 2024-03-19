@@ -3,7 +3,7 @@
 -- changeset Nikita:1
 CREATE TABLE ads
 (
-    ad_id          INT,
+    ad_id          BIGINT,
     author_id      INT,
     ad_price       INT,
     ad_title       VARCHAR,
