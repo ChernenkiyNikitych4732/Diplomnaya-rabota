@@ -15,17 +15,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "Long_id")
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String phone;
-    private String city;
-    private LocalDateTime regDate;
-    private String password;
+    String firstName;
+    String lastName;
+    String username;
+    String phone;
+    String city;
+    LocalDateTime regDate;
+    String password;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    Role role;
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Avatar avatar;
+    Avatar avatar;
     @OneToMany(mappedBy = "author")
-    private List<Ads> adsList;
+    List<Ads> adsList;
 }
