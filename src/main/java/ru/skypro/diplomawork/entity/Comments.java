@@ -12,14 +12,14 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "comment_text")
-    String text;
-    LocalDateTime createdAt;
+    private String text;
+    private LocalDateTime createdAt;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    User author;
+    private User author;
     @ManyToOne
     @JoinColumn(name = "ad_id")
-    Ads ad;
+    private Ads ad;
     @ManyToOne
-    Ads ads;
+    private Ads ads;
 }
