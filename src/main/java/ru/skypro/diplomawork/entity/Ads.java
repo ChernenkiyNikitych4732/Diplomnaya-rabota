@@ -21,7 +21,7 @@ public class Ads {
     @JoinColumn(name = "user_id")
     private User author;
     @OneToMany(mappedBy = "ads", cascade = CascadeType.ALL)
-    private List<Comment> comments;
+    private List<Comments> comments;
     @OneToMany(mappedBy = "ads", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Image> images;
 }

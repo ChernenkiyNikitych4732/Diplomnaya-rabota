@@ -3,7 +3,7 @@ package ru.skypro.diplomawork.service;
 import org.springframework.security.core.Authentication;
 import ru.skypro.diplomawork.dto.CommentDto;
 import ru.skypro.diplomawork.dto.ResponseWrapperComment;
-import ru.skypro.diplomawork.entity.Comment;
+import ru.skypro.diplomawork.entity.Comments;
 
 public interface CommentService {
 
@@ -17,6 +17,6 @@ public interface CommentService {
 
     CommentDto updateComments(long adPk, long id, CommentDto commentDto, Authentication authentication);
 
-    Comment getCommentById(long id);
+    Comments getCommentById(long id);
 }
 

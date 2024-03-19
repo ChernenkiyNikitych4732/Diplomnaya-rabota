@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.skypro.diplomawork.dto.CommentDto;
 import ru.skypro.diplomawork.dto.ResponseWrapperComment;
 import ru.skypro.diplomawork.entity.Ads;
-import ru.skypro.diplomawork.entity.Comment;
+import ru.skypro.diplomawork.entity.Comments;
 import ru.skypro.diplomawork.entity.User;
 import ru.skypro.diplomawork.exceptions.CommentNotFoundException;
 import ru.skypro.diplomawork.mapper.CommentMapper;
@@ -39,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
     public ResponseWrapperComment getAllCommentsForAdsWithId(Long adsId) {
         log.info("Was invoked getAllCommentsForAdsWithId method from {}", CommentService.class.getSimpleName());
         Ads adsById = adsService.getAdsById(adsId);
-        List<Comment> comments = adsById.getComments();
+        List<Comments> comments = adsById.getComments();
         return commentMapper.commentsListToResponseWrapperComment(comments.size(), comments);
     }
 
@@ -49,18 +49,18 @@ public class CommentServiceImpl implements CommentService {
      * @param adsId identification number of an ad
      * @param commentDto {@link CommentDto} from a client
      * @param authentication {@link Authentication} instance from controller
-     * @return {@link CommentDto} instance of created {@link Comment}
+     * @return {@link CommentDto} instance of created {@link Comments}
      */
     @Override
     public CommentDto createNewComment(Long adsId, CommentDto commentDto, Authentication authentication) {
         log.info("Was invoked createNewComment method from {}", CommentService.class.getSimpleName());
         Ads adsById = adsService.getAdsById(adsId);
         User author = userService.getUser(authentication.getName());
-        Comment comment = commentMapper.commentDtoToComment(commentDto);
+        Comments comment = commentMapper.commentDtoToComment(commentDto);
         comment.setAds(adsById);
         comment.setAuthor(author);
         comment.setCreatedAt(LocalDateTime.now());
-        Comment savedComment = commentRepository.save(comment);
+        Comments savedComment = commentRepository.save(comment);
         return commentMapper.commentToCommentDto(savedComment);
     }
 
@@ -74,7 +74,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto getComments(long adPk, long id) {
         log.info("Was invoked getComments by AdsId and comment id method from {}", CommentService.class.getSimpleName());
-        Comment comment = getCommentById(id);
+        Comments comment = getCommentById(id);
         return commentMapper.commentToCommentDto(comment);
     }
 
@@ -88,7 +88,7 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public void deleteComments (long adPk, long id,  Authentication authentication) {
-        Comment comment = getCommentById(id);
+        Comments comment = getCommentById(id);
         log.info("Comment to delete {} {}", comment.getId(), comment.getText());
         userService.checkIfUserHasPermissionToAlter(authentication, comment.getAuthor().getUsername());
         commentRepository.delete(comment);
@@ -105,7 +105,7 @@ public class CommentServiceImpl implements CommentService {
      */
     @Override
     public CommentDto updateComments(long adPk, long id, CommentDto commentDto, Authentication authentication){
-        Comment comment = getCommentById(id);
+        Comments comment = getCommentById(id);
         log.info("Was invoked updateComment method from {}", CommentService.class.getSimpleName());
         userService.checkIfUserHasPermissionToAlter(authentication, comment.getAuthor().getUsername());
         comment.setText(commentDto.getText());
@@ -117,11 +117,11 @@ public class CommentServiceImpl implements CommentService {
      * Get comment by comment id.
      *
      * @param id identification number of a comment
-     * @return {@link Comment} instance
+     * @return {@link Comments} instance
      * @throws CommentNotFoundException if comment wasn't found
      */
     @Override
-    public Comment getCommentById(long id) {
+    public Comments getCommentById(long id) {
         log.info("Was invoked getCommentById method from {}", CommentService.class.getSimpleName());
         return commentRepository.findById(id)
                 .orElseThrow(CommentNotFoundException::new);

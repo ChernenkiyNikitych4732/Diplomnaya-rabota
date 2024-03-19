@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "comment")
-public class Comment {
-    @Column(name = "ad_comment")
+public class Comments {
+    @Column(name = "comment_text")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
