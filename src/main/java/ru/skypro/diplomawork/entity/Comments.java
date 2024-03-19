@@ -22,10 +22,4 @@ public class Comments {
     Ads ad;
     @ManyToOne
     Ads ads;
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public Long getId() {
-        return id;
-    }
 }

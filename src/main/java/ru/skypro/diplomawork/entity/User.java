@@ -28,10 +28,4 @@ public class User {
     Avatar avatar;
     @OneToMany(mappedBy = "author")
     List<Ads> adsList;
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public Long getId() {
-        return id;
-    }
 }

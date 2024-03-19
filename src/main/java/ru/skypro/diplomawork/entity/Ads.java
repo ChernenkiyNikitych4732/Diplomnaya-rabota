@@ -24,10 +24,4 @@ public class Ads {
     List<Comments> comments;
     @OneToMany(mappedBy = "ads", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Image> images;
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public Long getId() {
-        return id;
-    }
 }
