@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 @Data
 @Table(name = "comment")
 public class Comments {
-    @Column(name = "comment_text")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "comment_text")
     private String text;
     @Column(name = "ads_text")
     private LocalDateTime createdAt;
