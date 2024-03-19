@@ -1,11 +1,12 @@
 -- liquibase formatted sql
 
 -- changeset Nikita:1
-CREATE TABLE comments
+CREATE TABLE ads
 (
-    comment_id   INT,
-    ad_id        INT,
-    author_id    INT,
-    comment_text VARCHAR,
-    created_at   TIMESTAMP
+    ad_id          INT,
+    author_id      INT,
+    ad_price       INT,
+    ad_title       VARCHAR,
+    ad_description VARCHAR,
+    image_path     VARCHAR
 );
