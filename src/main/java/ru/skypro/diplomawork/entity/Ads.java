@@ -14,14 +14,14 @@ public class Ads {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "ad_price")
-    private BigDecimal price;
-    private String title;
-    private String description;
+    BigDecimal price;
+    String title;
+    String description;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User author;
+    User author;
     @OneToMany(mappedBy = "ads", cascade = CascadeType.ALL)
-    private List<Comments> comments;
+    List<Comments> comments;
     @OneToMany(mappedBy = "ads", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Image> images;
+    List<Image> images;
 }
