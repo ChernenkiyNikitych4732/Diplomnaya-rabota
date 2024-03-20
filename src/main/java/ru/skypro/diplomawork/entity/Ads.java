@@ -16,6 +16,7 @@ public class Ads {
     @Column(name = "ad_price")
     private BigDecimal price;
     private String title;
+    @Column(name = "ads_description")
     private String description;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
