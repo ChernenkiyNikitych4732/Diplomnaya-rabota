@@ -8,14 +8,12 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.diplomawork.dto.ResponseWrapperUserDto;
 import ru.skypro.diplomawork.dto.Role;
 import ru.skypro.diplomawork.dto.UserDto;
-import ru.skypro.diplomawork.entity.Avatar;
 import ru.skypro.diplomawork.entity.User;
 import ru.skypro.diplomawork.exceptions.EmptyFileException;
 import ru.skypro.diplomawork.exceptions.ImageNotFoundException;
 import ru.skypro.diplomawork.exceptions.UserHasNoRightsException;
 import ru.skypro.diplomawork.exceptions.UserNotFoundException;
 import ru.skypro.diplomawork.mapper.UserMapper;
-import ru.skypro.diplomawork.repository.AvatarRepository;
 import ru.skypro.diplomawork.repository.UserRepository;
 import ru.skypro.diplomawork.service.UserService;
 
@@ -27,7 +25,6 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final AvatarRepository avatarRepository;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -78,17 +75,14 @@ public class UserServiceImpl implements UserService {
 
         User currentUser = getUser(username);
 
-        Avatar avatar = avatarRepository.findByUserId(currentUser.getId()).orElse(new Avatar());
 
-        try {
-            avatar.setImage(file.getBytes());
-        } catch (IOException e) {
-            log.error("File '{}' has some problems and cannot be read.", file.getOriginalFilename());
-            throw new RuntimeException("Problems with uploaded image");
-        }
-        avatar.setUser(currentUser);
 
-        avatarRepository.save(avatar);
+
+    }
+
+    @Override
+    public byte[] getUserAvatar(long id) {
+        return new byte[0];
     }
 
     /**
@@ -96,11 +90,6 @@ public class UserServiceImpl implements UserService {
      * @param id id identification number of an image
      * @return byte array
      */
-    @Override
-    public byte[] getUserAvatar(long id) {
-        Avatar avatar = avatarRepository.findById(id).orElseThrow(ImageNotFoundException::new);
-        return avatar.getImage();
-    }
 
     /**
      * Return a {@link User} by its username from the DB.

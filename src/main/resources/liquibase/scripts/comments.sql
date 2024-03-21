@@ -3,9 +3,9 @@
 -- changeset Nikita:1
 CREATE TABLE comments
 (
-    comment_id   INT,
-    ad_id        INT,
-    author_id    INT,
+    id   BIGSERIAL PRIMARY KEY ,
+    ad_id        BIGINT  REFERENCES ads(ad_id),
+    author_id    BIGINT  REFERENCES users(id),
     comment_text VARCHAR,
     created_at   TIMESTAMP
 );

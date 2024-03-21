@@ -3,7 +3,7 @@
 -- changeset Nikita:1
 CREATE TABLE users
 (
-    id         INTEGER,
+    id         BIGSERIAL PRIMARY KEY ,
     username   VARCHAR,
     first_name VARCHAR,
     last_name  VARCHAR,

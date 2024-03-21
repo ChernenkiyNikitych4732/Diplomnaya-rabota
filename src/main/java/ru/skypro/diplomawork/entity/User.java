@@ -8,24 +8,21 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
-    @Column(name = "ad_user")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "Long_id")
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     private String username;
     private String phone;
-    private String city;
-    private LocalDateTime regDate;
     private String password;
     @Enumerated(EnumType.STRING)
+    @Column(name = "user_role")
     private Role role;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Avatar avatar;
     @OneToMany(mappedBy = "author")
     private List<Ads> adsList;
 }

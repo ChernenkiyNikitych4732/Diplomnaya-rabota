@@ -3,7 +3,6 @@ package ru.skypro.diplomawork.mapper;
 import org.mapstruct.*;
 import ru.skypro.diplomawork.dto.ResponseWrapperUserDto;
 import ru.skypro.diplomawork.dto.UserDto;
-import ru.skypro.diplomawork.entity.Avatar;
 import ru.skypro.diplomawork.entity.User;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
 public interface UserMapper {
 
     @Mapping(source = "username", target = "email")
-    @Mapping(source = "avatar", target = "image", qualifiedByName = "getUserAvatarLink")
     UserDto userToUserDto(User user);
 
     @Mapping(source = "email", target = "username")
@@ -21,11 +19,6 @@ public interface UserMapper {
 
     @Mapping(source = "size", target = "count")
     @Mapping(source = "userList", target = "results")
-    ResponseWrapperUserDto userListToResponseWrapperUserDto(Integer size,List<User> userList);
-
-    @Named("getUserAvatarLink")
-    default String getUserAvatarLink(Avatar avatar) {
-        return (avatar == null) ? null : "/users/avatar/" + avatar.getId();
-    }
-
+    ResponseWrapperUserDto userListToResponseWrapperUserDto(Integer size, List<User> userList);
 }
+

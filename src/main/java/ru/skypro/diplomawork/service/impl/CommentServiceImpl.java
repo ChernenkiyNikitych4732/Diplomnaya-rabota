@@ -57,7 +57,7 @@ public class CommentServiceImpl implements CommentService {
         Ads adsById = adsService.getAdsById(adsId);
         User author = userService.getUser(authentication.getName());
         Comments comment = commentMapper.commentDtoToComment(commentDto);
-        comment.setAds(adsById);
+//        comment.setAds(adsById);
         comment.setAuthor(author);
         comment.setCreatedAt(LocalDateTime.now());
         Comments savedComment = commentRepository.save(comment);

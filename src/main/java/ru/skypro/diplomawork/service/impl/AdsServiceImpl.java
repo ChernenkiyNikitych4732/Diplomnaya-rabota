@@ -11,7 +11,6 @@ import ru.skypro.diplomawork.dto.CreateAdsDto;
 import ru.skypro.diplomawork.dto.FullAdsDto;
 import ru.skypro.diplomawork.dto.ResponseWrapperAds;
 import ru.skypro.diplomawork.entity.Ads;
-import ru.skypro.diplomawork.entity.Image;
 import ru.skypro.diplomawork.entity.User;
 import ru.skypro.diplomawork.exceptions.AdsNotFoundException;
 import ru.skypro.diplomawork.mapper.AdsMapper;
@@ -60,9 +59,6 @@ public class AdsServiceImpl implements AdsService {
         Ads ads = adsMapper.createAdsDtoToAds(createAdsDto);
         ads.setAuthor(currentUser);
         Ads savedAds = adsRepository.save(ads);
-
-        Image adsImage = imageService.createImage(image, savedAds);
-        savedAds.setImages(List.of(adsImage));
         return adsMapper.adsToAdsDto(savedAds);
     }
 
