@@ -29,8 +29,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeHttpRequests((authz) ->
-                        authz
+                .authorizeHttpRequests((auth) ->
+                        auth
                                 .mvcMatchers(AUTH_WHITELIST).permitAll()
                                 .mvcMatchers("/users/avatar/**").permitAll()
                                 .mvcMatchers("/ads/**", "/users/**").authenticated()
